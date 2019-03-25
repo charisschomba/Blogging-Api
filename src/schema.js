@@ -11,6 +11,28 @@ export default `
     createUser(data: user!): User!
     createPost(data: post!): Post!
     createComment(data: comment!): Comment!
+    deleteUser(id: ID!): User!
+    deletePost(id: ID!): Post!
+    deleteComment(id: ID!): Comment!
+    updateUser(id: ID! data: updateUser!): User!
+    updatePost(id: ID! data: updatePost!): Post!
+    updateComment(id: ID! data: updateComment!): Comment!
+  }
+  
+  input updateUser {
+    name: String
+    email: String
+    age: Int
+  }
+  
+   input updatePost {
+    title: String
+    body: String
+    published: Boolean
+  }
+  
+   input updateComment {
+    text: String
   }
   
   input user {
