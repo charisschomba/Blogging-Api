@@ -1,14 +1,16 @@
-import { GraphQLServer} from "graphql-yoga";
+import { GraphQLServer, PubSub } from "graphql-yoga";
 import db from './db';
 import resolvers from './resolvers';
-import typeDefs from './schema'
+import typeDefs from './schema';
 
+const pubSub = new PubSub();
 // create server
 const server = new GraphQLServer({
   typeDefs,
   resolvers,
   context: {
-    db
+    db,
+    pubSub
   }
 });
 

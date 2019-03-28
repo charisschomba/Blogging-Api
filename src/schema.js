@@ -19,6 +19,11 @@ export default `
     updateComment(id: ID! data: updateComment!): Comment!
   }
   
+  type Subscription {
+    comment(postId: ID!): CommentSubscriptionPayload!
+    post: PostSubscriptionPayload!
+  }
+  
   input updateUser {
     name: String
     email: String
@@ -80,4 +85,19 @@ export default `
     post: Post!
   }
   
+  type PostSubscriptionPayload{
+    mutation: MutationType!
+    data: Post!
+  }
+  
+  type CommentSubscriptionPayload{
+    mutation: MutationType!
+    data: Comment!
+  }
+  
+  enum MutationType {
+    CREATED
+    UPDATED
+    DELETED
+  }
 `;

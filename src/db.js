@@ -54,12 +54,12 @@ const comments = [
   {
     id: "2",
     text: 'new comment1',
-    author: "84aa64cf-b6d2-406a-b635-e0f98ebb14f5",
+    author: "2",
     post: "2",
   },
 
   {
-    id: 3,
+    id: "3",
     text: 'new comment2',
     author: "84aa64cf-b6d2-406a-b635-e0f98ebb14f5",
     post: "2",
