@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js --ext js, graphql"
+    "start": "nodemon --exec babel-node src/index.js --ext js, graphql",
+    "get-schema": "graphql get-schema -p blogging"
   },
   "repository": "https://github.com/charisschomba/graphql-project.git",
   "author": "charisschomba <charisschomba@gmail.com>",
@@ -12,8 +13,11 @@
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "graphql-cli": "^3.0.11",
     "graphql-yoga": "^1.17.4",
     "nodemon": "^1.18.10",
+    "prisma": "^1.29.2",
+    "prisma-binding": "^2.3.10",
     "uuid": "^3.3.2"
   }
 }

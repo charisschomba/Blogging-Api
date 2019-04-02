@@ -27,7 +27,6 @@ export default `
   input updateUser {
     name: String
     email: String
-    age: Int
   }
   
    input updatePost {
@@ -43,7 +42,6 @@ export default `
   input user {
     name: String!
     email: String! 
-    age: Int
   }
   
   input post{
@@ -63,7 +61,6 @@ export default `
     id: ID!
     name: String!
     email: String!
-    age: Int
     posts: [Post!]!
     comments: [Comment!]!
     
