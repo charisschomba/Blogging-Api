@@ -8,7 +8,8 @@ export default `
   }
   
   type Mutation{
-    createUser(data: user!): User!
+    createUser(data: user!): Authpayload!
+    login(data: login!): Authpayload!
     createPost(data: post!): Post!
     createComment(data: comment!): Comment!
     deleteUser(id: ID!): User!
@@ -29,6 +30,16 @@ export default `
     email: String
   }
   
+   input login {
+    email: String!
+    password: String!
+  }
+  
+  type Authpayload {
+   user: User!
+   token: String!
+  }
+  
    input updatePost {
     title: String
     body: String
@@ -41,6 +52,7 @@ export default `
   
   input user {
     name: String!
+    password: String!
     email: String! 
   }
   
@@ -48,7 +60,6 @@ export default `
     title: String!
     body: String! 
     published:Boolean! 
-    author: ID!
   }
   
   input comment {
@@ -60,6 +71,7 @@ export default `
   type User {
     id: ID!
     name: String!
+    password: String!
     email: String!
     posts: [Post!]!
     comments: [Comment!]!
@@ -84,12 +96,12 @@ export default `
   
   type PostSubscriptionPayload{
     mutation: MutationType!
-    data: Post!
+    node: Post
   }
   
   type CommentSubscriptionPayload{
     mutation: MutationType!
-    data: Comment!
+    node: Comment
   }
   
   enum MutationType {

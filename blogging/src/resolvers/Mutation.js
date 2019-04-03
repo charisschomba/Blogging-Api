@@ -1,25 +1,58 @@
+import { hash, compare } from 'bcrypt';
+import { genToken, getUserId} from "../utils/auth";
+
 const Mutation = {
   async createUser(parent, args, { prisma }, info){
     const emailTaken = await prisma.exists.User({email: args.data.email});
     if(emailTaken){
       throw new Error('email taken')
     }
-    return prisma.mutation.createUser({data: args.data})
+    if(args.data.password.length < 8){
+      throw new Error("Password must be 8 or more characters")
+    }
+    const password = await hash(args.data.password, 10);
+    const user = await prisma.mutation.createUser({
+      data: {
+        ...args.data,
+        password
+    }
+    });
+    return {
+      user,
+      token: genToken({userId: user.id}, "hello")
+    }
   },
 
-  async createPost(parent,{data}, {prisma, pubSub}, info){
-    const userExists = await prisma.exists.User({id: data.author});
-
-    if(!userExists){
+  async login(parent, {data}, {prisma}, info){
+     const user = await prisma.query.user({
+        where:{
+          email: data.email
+        }
+      });
+    if(!user){
       throw new Error('user not found')
     }
+    const isMatch = await compare(data.password, user.password);
+    if(!isMatch){
+      throw new Error('unable to login')
+    }
+
+    return {
+      user,
+      token: genToken({userId: user.id}, "hello")
+    }
+
+  },
+
+  async createPost(parent,{data}, {prisma, request}, info){
+    const userId = getUserId(request);
     return prisma.mutation.createPost({
       data: {
         title: data.title,
         body: data.body,
-        author: {
+        author:{
           connect: {
-            id: data.author
+            id: userId
           }
         },
         published: data.published

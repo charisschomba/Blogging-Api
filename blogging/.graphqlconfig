@@ -3,6 +3,7 @@
     "blogging": {
       "schemaPath": "src/generated/prisma.graphql",
       "extensions": {
+        "prisma": "prisma.yml",
         "endpoints": {
           "defaults": "http://localhost:4466"
         }
