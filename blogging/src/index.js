@@ -3,6 +3,7 @@ import db from './db';
 import resolvers from './resolvers';
 import typeDefs from './schema';
 import prisma from './prisma';
+import { fragmentReplacements} from "./resolvers";
 
 const pubSub = new PubSub();
 // create server
@@ -16,7 +17,9 @@ const server = new GraphQLServer({
       pubSub,
       request,
     }
-  }
+  },
+  fragmentReplacements
+
 });
 
 // start the server

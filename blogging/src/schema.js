@@ -5,17 +5,20 @@ export default `
   posts(query: String):[Post!]!
   users(query: String): [User!]!
   comments(query: String): [Comment!]!
+  post(id:ID!): Post!
+  user:User!
+  myPosts(query: String):[Post!]!
   }
-  
+ 
   type Mutation{
     createUser(data: user!): Authpayload!
     login(data: login!): Authpayload!
     createPost(data: post!): Post!
     createComment(data: comment!): Comment!
-    deleteUser(id: ID!): User!
+    deleteUser: User!
     deletePost(id: ID!): Post!
     deleteComment(id: ID!): Comment!
-    updateUser(id: ID! data: updateUser!): User!
+    updateUser(data: updateUser!): User!
     updatePost(id: ID! data: updatePost!): Post!
     updateComment(id: ID! data: updateComment!): Comment!
   }
@@ -64,7 +67,6 @@ export default `
   
   input comment {
     text: String!
-    author: ID! 
     post: String!
   }
   
@@ -72,8 +74,8 @@ export default `
     id: ID!
     name: String!
     password: String!
-    email: String!
-    posts: [Post!]!
+    email: String
+    posts: [Post!]
     comments: [Comment!]!
     
   }
