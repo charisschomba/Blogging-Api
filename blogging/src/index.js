@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import { GraphQLServer, PubSub } from "graphql-yoga";
 import db from './db';
 import resolvers from './resolvers';
@@ -23,6 +24,6 @@ const server = new GraphQLServer({
 });
 
 // start the server
-server.start(() => {
-  return console.log('Server is running on localhost:4000')
+server.start({port: process.env.PORT || 4000},() => {
+  return console.log('The server is up!')
 });

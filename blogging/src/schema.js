@@ -60,8 +60,6 @@ export default `
     name: String!
     password: String!
     email: String! 
-    updatedAt: String!
-    createdAt: String!
   }
   
   input post{
