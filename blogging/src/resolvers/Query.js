@@ -2,7 +2,12 @@ import { getUserId} from "../utils/auth";
 
 const Query = {
   users(parent, args, {db, prisma}, info) {
-    const opArgs = {};
+    const opArgs = {
+      orderBy: args.orderBy,
+      first: args.first,
+      skip: args.skip,
+      after: args.after
+    };
     if (args.query) {
       opArgs.where = {
         OR: [{
@@ -17,7 +22,11 @@ const Query = {
     const opArgs = {
       where: {
         published: true
-      }
+      },
+      orderBy: args.orderBy,
+      first: args.first,
+      skip: args.skip,
+      after: args.after
     };
     if (args.query) {
       opArgs.where.OR = [{
@@ -32,7 +41,12 @@ const Query = {
   },
 
   comments(parent, args, {prisma}, info) {
-    const opArgs = {};
+    const opArgs = {
+      orderBy: args.orderBy,
+      first: args.first,
+      skip: args.skip,
+      after: args.after
+    };
     if (args.query) {
       opArgs.where = {
         text_contains: args.query.toLowerCase()
@@ -64,22 +78,26 @@ const Query = {
     }, info)
   },
 
-  async myPosts(parent, {query}, {prisma, request}, info){
+  async myPosts(parent, args, {prisma, request}, info){
     const userId = getUserId(request);
     const opArgs = {
+      orderBy: args.orderBy,
+      first: args.first,
+      skip: args.skip,
+      after: args.after,
       where: {
         author: {
           id: userId
         }
       }
     };
-    if(query){
+    if(args.query){
       opArgs.where.OR =[
         {
-          title_contains: query.toLowerCase()
+          title_contains: args.query.toLowerCase()
         },
         {
-          body_contains: query.toLowerCase()
+          body_contains: args.query.toLowerCase()
         }
       ]
     }
