@@ -1,15 +1,34 @@
+import {getUserId} from "../utils/auth";
+
 const User = {
-  posts(parent, args, { db }, info) {
-    return db.posts.filter(post => {
-      return parent.id === post.author
-    });
+  email:{
+    fragment: "fragment userId on User { id }",
+    resolve(parent, args, {request}, info){
+      const userId = getUserId(request, false);
+      if(userId && userId === parent.id){
+        return parent.email
+      }else {
+        return null
+      }
+    }
+  },
+  posts: {
+    fragment: "fragment userId on User { id }",
+    async resolve(parent, args, {prisma}, info) {
+      return prisma.query.posts({
+        where: {
+          published: true,
+          author: {
+            id: parent.id
+          }
+        }
+      }, info)
+    }
   },
 
-  comments(parent, args, { db }, info){
-    return db.comments.filter(comment => {
-      return parent.id === comment.author
-    });
-  }
+  password(parent, args, ctx, info){
+    return null
+}
 };
 
 export default User;
