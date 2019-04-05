@@ -24,7 +24,11 @@ const User = {
         }
       }, info)
     }
-  }
+  },
+
+  password(parent, args, ctx, info){
+    return null
+}
 };
 
 export default User;

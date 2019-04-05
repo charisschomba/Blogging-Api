@@ -77,7 +77,7 @@ export default `
   type User {
     id: ID!
     name: String!
-    password: String!
+    password: String
     email: String
     posts: [Post!]
     comments: [Comment!]!

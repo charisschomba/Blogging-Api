@@ -16,7 +16,7 @@ const Mutation = {
     });
     return {
       user,
-      token: genToken({userId: user.id}, "hello")
+      token: genToken({userId: user.id})
     }
   },
 
@@ -36,7 +36,7 @@ const Mutation = {
 
     return {
       user,
-      token: genToken({userId: user.id}, "hello")
+      token: genToken({userId: user.id})
     }
 
   },
