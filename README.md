@@ -32,4 +32,8 @@ Run `docker-compose up`
 
 Run `prisma deploy -e ./config/dev.env`
 
+Cd `GraphQl-blogging-app`
+
+Run `yarn run dev` to start the server
+
 On your browser navigate to `localhost:4000`
